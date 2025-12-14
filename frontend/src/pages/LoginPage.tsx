@@ -13,8 +13,9 @@ const LoginPage = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
         try {
-            const { data } = await axios.post('http://localhost:5001/api/auth/login', {
+            const { data } = await axios.post(`${API_URL}/api/auth/login`, {
                 username,
                 password,
             });

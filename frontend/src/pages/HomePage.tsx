@@ -24,8 +24,9 @@ const HomePage = () => {
     }, [searchTerm]);
 
     const fetchSweets = async () => {
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
         try {
-            const { data } = await axios.get(`http://localhost:5001/api/sweets?keyword=${searchTerm}`);
+            const { data } = await axios.get(`${API_URL}/api/sweets?keyword=${searchTerm}`);
             setSweets(data);
         } catch (error) {
             console.error('Error fetching sweets:', error);
@@ -35,6 +36,7 @@ const HomePage = () => {
     };
 
     const handlePurchase = async (id: string) => {
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
         if (!user) {
             alert('Please login to purchase');
             return;
@@ -42,7 +44,7 @@ const HomePage = () => {
         setPurchaseLoading(id);
         try {
             await axios.post(
-                `http://localhost:5001/api/sweets/${id}/purchase`,
+                `${API_URL}/api/sweets/${id}/purchase`,
                 {},
                 {
                     headers: { Authorization: `Bearer ${user.token}` },

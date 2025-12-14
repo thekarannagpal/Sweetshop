@@ -22,8 +22,9 @@ const AdminPage = () => {
     }, []);
 
     const fetchSweets = async () => {
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
         try {
-            const { data } = await axios.get('http://localhost:5001/api/sweets');
+            const { data } = await axios.get(`${API_URL}/api/sweets`);
             setSweets(data);
         } catch (error) {
             console.error(error);
@@ -31,9 +32,10 @@ const AdminPage = () => {
     };
 
     const handleDelete = async (id: string) => {
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
         if (!window.confirm('Are you sure?')) return;
         try {
-            await axios.delete(`http://localhost:5001/api/sweets/${id}`, {
+            await axios.delete(`${API_URL}/api/sweets/${id}`, {
                 headers: { Authorization: `Bearer ${user?.token}` },
             });
             fetchSweets();
@@ -43,11 +45,12 @@ const AdminPage = () => {
     };
 
     const handleRestock = async (id: string) => {
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
         const qty = prompt('Enter quantity to add:', '10');
         if (!qty) return;
         try {
             await axios.post(
-                `http://localhost:5001/api/sweets/${id}/restock`,
+                `${API_URL}/api/sweets/${id}/restock`,
                 { quantity: parseInt(qty) },
                 {
                     headers: { Authorization: `Bearer ${user?.token}` },
@@ -61,9 +64,10 @@ const AdminPage = () => {
 
     const handleAddSweet = async (e: React.FormEvent) => {
         e.preventDefault();
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
         try {
             await axios.post(
-                'http://localhost:5001/api/sweets',
+                `${API_URL}/api/sweets`,
                 {
                     ...newSweet,
                     price: parseFloat(newSweet.price),
