@@ -62,6 +62,8 @@ To test the **Admin** features (Inventory Management), use the following credent
 | **Admin** | `ishan` | `1234` |
 
 *Note: You may need to register this user first if the database is empty, or manually set `isAdmin: true` in the database if using a fresh install.*
+## My AI Usage
+For test creation and running
 
 ## 📂 Project Structure
 
