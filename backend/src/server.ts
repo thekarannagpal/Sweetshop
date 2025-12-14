@@ -6,7 +6,7 @@ import helmet from 'helmet';
 
 dotenv.config();
 
-const app = express();
+export const app = express();
 console.log('Environment PORT:', process.env.PORT);
 const PORT = process.env.PORT || 5001;
 
